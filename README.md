@@ -53,16 +53,28 @@ const iAlturki = {
 
 ---
 
-### GitHub Stats
+### Code
 
-<p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=iAlturki&show_icons=true&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="stats" />
-  <img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iAlturki&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=8CFF8C&text_color=C9D1D9" alt="top languages" />
-</p>
+From [MicMute](https://github.com/iAlturki/MicMute) — toggling the default microphone through the Windows Core Audio API (COM). The app tags its own changes with a private event GUID so its volume callback never reacts to itself:
 
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=iAlturki&hide_border=true&background=00000000&ring=8CFF8C&fire=76B900&currStreakLabel=8CFF8C&sideLabels=C9D1D9&dates=8B949E&currStreakNum=FFFFFF&sideNums=FFFFFF" alt="streak" />
-</p>
+```c
+// audio.c - set the default mic's mute state via Core Audio (COM).
+// Our own changes carry GUID_MicMuteEvent, so the volume callback ignores them.
+void SetMicMute(BOOL mute)
+{
+    if (!g_micVol) {
+        TrayBalloon(APP_NAME, L"No microphone available.");
+        return;
+    }
+    if (SUCCEEDED(g_micVol->lpVtbl->SetMute(g_micVol, mute, &GUID_MicMuteEvent))) {
+        g_appState.isMuted = mute;
+        SyncMuteUI();
+        PlayFeedback(mute);
+    }
+}
+
+void ToggleMicrophone(void) { SetMicMute(!g_appState.isMuted); }
+```
 
 ---
 
@@ -72,8 +84,17 @@ const iAlturki = {
   <a href="https://github.com/iAlturki/MicMute"><img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=iAlturki&repo=MicMute&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="MicMute" /></a>
   <a href="https://github.com/iAlturki/Nvidia_Instant_Replay_Fix"><img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=iAlturki&repo=Nvidia_Instant_Replay_Fix&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="NVIDIA Instant Replay Fix" /></a>
 </p>
+
 <p align="center">
-  <a href="https://github.com/iAlturki/ialturki.github.io"><img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=iAlturki&repo=ialturki.github.io&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="Portfolio" /></a>
+  <a href="https://444005129.xyz">See the full portfolio at 444005129.xyz</a>
+</p>
+
+---
+
+### Most Used Languages
+
+<p align="center">
+  <img width="46%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iAlturki&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=8CFF8C&text_color=C9D1D9" alt="top languages" />
 </p>
 
 ---
