@@ -13,7 +13,7 @@
 
 ---
 
-### 🧠 whoami
+### whoami
 
 ```ts
 const iAlturki = {
@@ -27,7 +27,7 @@ const iAlturki = {
 
 ---
 
-### 🛠️ Tech Stack
+### Tech Stack
 
 **Languages**
 
@@ -53,10 +53,10 @@ const iAlturki = {
 
 ---
 
-### 📊 GitHub Stats
+### GitHub Stats
 
 <p align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=iAlturki&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="stats" />
+  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=iAlturki&show_icons=true&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="stats" />
   <img width="40%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=iAlturki&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=8CFF8C&text_color=C9D1D9" alt="top languages" />
 </p>
 
@@ -66,7 +66,7 @@ const iAlturki = {
 
 ---
 
-### 🚀 Featured Projects
+### Featured Projects
 
 <p align="center">
   <a href="https://github.com/iAlturki/MicMute"><img width="49%" src="https://github-readme-stats.vercel.app/api/pin/?username=iAlturki&repo=MicMute&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="MicMute" /></a>
