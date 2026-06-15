@@ -1,6 +1,6 @@
-<h1 align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=30&pause=1000&color=8CFF8C&center=true&vCenter=true&width=620&height=52&lines=Hi%2C+I%27m+iAlturki" alt="Hi, I'm iAlturki" />
-</h1>
+<p align="center">
+  <img src="iAlturki_3d.svg" alt="iAlturki" width="540" />
+</p>
 
 <p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=18&pause=900&color=B8C0CC&center=true&vCenter=true&width=640&height=40&lines=Systems+%26+utilities+developer;I+build+small%2C+sharp+tools+that+do+one+thing+well;C+%E2%80%A2+PowerShell+%E2%80%A2+Java+%E2%80%A2+Web;Software+that+speaks+for+itself" alt="tagline" />
