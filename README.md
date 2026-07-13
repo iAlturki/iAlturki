@@ -45,56 +45,14 @@ const iAlturki = {
 
 ---
 
-### Code
-
-From [MicMute](https://github.com/iAlturki/MicMute) — toggling the default microphone through the Windows Core Audio API (COM). The app tags its own changes with a private event GUID so its volume callback never reacts to itself:
-
-```c
-// audio.c - set the default mic's mute state via Core Audio (COM).
-// Our own changes carry GUID_MicMuteEvent, so the volume callback ignores them.
-void SetMicMute(BOOL mute)
-{
-    if (!g_micVol) {
-        TrayBalloon(APP_NAME, L"No microphone available.");
-        return;
-    }
-    if (SUCCEEDED(g_micVol->lpVtbl->SetMute(g_micVol, mute, &GUID_MicMuteEvent))) {
-        g_appState.isMuted = mute;
-        SyncMuteUI();
-        PlayFeedback(mute);
-    }
-}
-
-void ToggleMicrophone(void) { SetMicMute(!g_appState.isMuted); }
-```
-
-And how I like my TypeScript — failures typed, not thrown:
-
-```ts
-// result.ts — errors as values, so the compiler makes you handle them.
-type Ok<T>  = { ok: true;  value: T };
-type Err<E> = { ok: false; error: E };
-export type Result<T, E = Error> = Ok<T> | Err<E>;
-
-export const attempt = async <T>(fn: () => Promise<T>): Promise<Result<T>> => {
-  try   { return { ok: true,  value: await fn() }; }
-  catch (e) { return { ok: false, error: e instanceof Error ? e : new Error(String(e)) }; }
-};
-```
-
----
-
 ### Featured Projects
 
-<a href="https://github.com/iAlturki/MicMute"><img src="https://github-readme-stats.vercel.app/api/pin/?username=iAlturki&repo=MicMute&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="MicMute" /></a> <a href="https://github.com/iAlturki/Nvidia_Instant_Replay_Fix"><img src="https://github-readme-stats.vercel.app/api/pin/?username=iAlturki&repo=Nvidia_Instant_Replay_Fix&hide_border=true&bg_color=00000000&title_color=8CFF8C&icon_color=76B900&text_color=C9D1D9" alt="NVIDIA Instant Replay Fix" /></a>
+<p align="center">
+  <a href="https://github.com/iAlturki/MicMute"><img width="420" src="https://opengraph.githubassets.com/1/iAlturki/MicMute" alt="MicMute" /></a>
+  <a href="https://github.com/iAlturki/Nvidia_Instant_Replay_Fix"><img width="420" src="https://opengraph.githubassets.com/1/iAlturki/Nvidia_Instant_Replay_Fix" alt="NVIDIA Instant Replay Fix" /></a>
+</p>
 
 <p><a href="https://444005129.xyz">See the full portfolio at 444005129.xyz →</a></p>
-
----
-
-### Most Used Languages
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=iAlturki&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=8CFF8C&text_color=C9D1D9" alt="top languages" />
 
 ---
 
