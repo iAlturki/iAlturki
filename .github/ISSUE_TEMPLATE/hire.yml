@@ -1,0 +1,39 @@
+name: Hiring inquiry
+description: Contact iAlturki about a software engineering role. This issue is public.
+title: "Hiring inquiry: "
+labels: ["hiring"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out. This issue is **public**, so please leave out phone numbers, private email addresses and anything confidential. I reply in this thread.
+  - type: input
+    id: role
+    attributes:
+      label: Role
+      placeholder: "Software Engineer, Windows desktop"
+    validations:
+      required: true
+  - type: input
+    id: company
+    attributes:
+      label: Company or team
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options: ["Full-time", "Internship", "Contract", "Not sure yet"]
+    validations:
+      required: false
+  - type: input
+    id: link
+    attributes:
+      label: Link to the posting or team page
+      placeholder: "https://"
+  - type: textarea
+    id: note
+    attributes:
+      label: Anything else
+      description: "Optional: what the team builds, location or remote, timeline."

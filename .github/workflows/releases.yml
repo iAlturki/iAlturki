@@ -1,0 +1,30 @@
+name: Refresh release numbers
+on:
+  schedule:
+    - cron: '17 3 * * *'   # daily, at an odd minute
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: releases
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node tools/releases.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit only on change
+        run: |
+          git diff --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Refresh release numbers"
+          git push
+# Scheduled workflows are disabled after 60 days without repository activity.
+# The "as of" date is rewritten at least every 28 days, which keeps this one alive.
