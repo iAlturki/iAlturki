@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240" role="img" font-family="'Segoe UI Variable Display','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif">
+<title>ytr-music: the native miniplayer docked above the taskbar expands into a player card on hover. Built on pear-desktop.</title>
+<style>
+.mp{transform-box:view-box;transform-origin:186px 110px;animation:mp 7000ms infinite}
+@keyframes mp{0%,18%{transform:scale(0.129,0.714)}26%,78%{transform:none;animation-timing-function:cubic-bezier(.2,.9,.25,1)}86%,100%{transform:scale(0.129,0.714)}}
+.mp{animation-timing-function:cubic-bezier(.2,.9,.25,1)}
+.dock{animation:dock 7000ms infinite}@keyframes dock{0%,18%{opacity:1}21%,82%{opacity:0}86%,100%{opacity:1}}
+.full{opacity:0;animation:full 7000ms infinite}@keyframes full{0%,23%{opacity:0}27%,76%{opacity:1}80%,100%{opacity:0}}
+.seek{transform-box:fill-box;transform-origin:0 50%;animation:seek 7000ms linear infinite}@keyframes seek{0%,26%{transform:scaleX(.18)}78%,100%{transform:scaleX(.72)}}
+.ptr{animation:ptr 7000ms infinite}
+@keyframes ptr{0%{transform:translate(200px,70px)}16%{transform:translate(174px,70px)}78%{transform:translate(146px,72px)}92%,100%{transform:translate(200px,70px)}}
+@media (prefers-reduced-motion:reduce){.full{opacity:1}.dock,.ptr{opacity:0}.mp{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<rect x=".5" y=".5" width="199" height="239" rx="16" fill="#15171F" stroke="#2A2F3B"/>
+<clipPath id="scr"><rect x="8" y="8" width="184" height="116" rx="10"/></clipPath>
+<g clip-path="url(#scr)"><rect x="8" y="8" width="184" height="116" fill="#0D0F14"/><rect x="8" y="112" width="184" height="12" fill="#1B1F29"/>
+<rect x="78" y="114.5" width="7" height="7" rx="1.5" fill="#2A2E39"/><rect x="88" y="114.5" width="7" height="7" rx="1.5" fill="#2A2E39"/><rect x="98" y="114.5" width="7" height="7" rx="1.5" fill="#3A3F4C"/><rect x="108" y="114.5" width="7" height="7" rx="1.5" fill="#2A2E39"/><rect x="118" y="114.5" width="7" height="7" rx="1.5" fill="#2A2E39"/>
+<g class="mp"><rect x="80.6" y="40.56" width="105.4" height="69.44" rx="4.34" fill="#1A1416" stroke="#fff" stroke-opacity=".12"/>
+<rect x="80.6" y="40.56" width="105.4" height="69.44" rx="4.34" fill="#FF3D00" fill-opacity=".09"/></g>
+<g class="dock"><circle cx="179.18" cy="68.46" r="4.96" fill="#FF3D00"/><circle cx="179.18" cy="82.1" r="1.55" fill="#C9CED7"/><circle cx="179.18" cy="90.78" r="1.55" fill="#C9CED7"/><circle cx="179.18" cy="99.46" r="1.55" fill="#C9CED7"/></g>
+<g class="full"><rect x="86.18" y="46.14" width="21.08" height="21.08" rx="3" fill="#FF3D00"/><circle cx="96.72" cy="56.68" r="5.89" fill="#0D0F14" fill-opacity=".55"/>
+<rect x="111.6" y="49.24" width="46.5" height="3.1" rx="1.55" fill="#F2F3F7"/><rect x="111.6" y="55.44" width="31" height="2.48" rx="1.24" fill="#7A8296"/>
+<rect x="86.8" y="77.76" width="93" height="1.4" rx=".7" fill="#fff" fill-opacity=".15"/><rect class="seek" x="86.8" y="77.76" width="93" height="1.4" rx=".7" fill="#FF3D00"/>
+<path d="M130.8 90.38l6 3.5-6 3.5z" fill="#F2F3F7"/><path d="M119.3 91.38l-3.5 2.5 3.5 2.5zM147.3 91.38l3.5 2.5-3.5 2.5z" fill="#F2F3F7"/></g>
+<path class="ptr" d="M0 0v11l3-3 2.2 4.6 1.6-.8L4.6 7.3H8.6z" fill="#F2F3F7" stroke="#10131A" stroke-width=".8"/></g>
+<rect x="8.5" y="8.5" width="183" height="115" rx="9.5" fill="none" stroke="#fff" stroke-opacity=".06"/>
+<rect x="18" y="143" width="8" height="8" rx="2" fill="#FF3D00"/>
+<text x="33" y="151.5" font-size="15" font-weight="600" fill="#F2F3F7">ytr-music</text>
+<text x="18" y="174" font-size="11.5" fill="#A3AAB8">YouTube Music for Windows.</text>
+<text x="18" y="200" font-size="11"><tspan fill="#F2F3F7" font-weight="600"><!-- kb:ytr-music -->690<!-- /kb --></tspan><tspan fill="#8B93A5"> KB</tspan><tspan dx="9"> </tspan><tspan fill="#F2F3F7" font-weight="600">C++</tspan><tspan fill="#8B93A5"> </tspan></text>
+<text x="18" y="224" font-size="10.5" fill="#6B7385">Open on GitHub</text>
+<path d="M174 220.5h8m-3-3 3 3-3 3" stroke="#6B7385" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240" role="img" font-family="'Segoe UI Variable Display','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif">
+<title>Instant Replay Fix: when a protected app opens, NVIDIA alone throws the whole replay away; with the fix it keeps recording. 234 KB.</title>
+<style>
+.g1{transform-box:fill-box;transform-origin:0 50%;animation:g1 7000ms linear infinite}
+@keyframes g1{0%{transform:scaleX(0)}38%,100%{transform:scaleX(1)}}
+.g2{transform-box:fill-box;transform-origin:0 50%;animation:g2 7000ms linear infinite}
+@keyframes g2{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+.r1{opacity:0;transform-box:fill-box;transform-origin:100% 50%;animation:r1 7000ms infinite}
+@keyframes r1{0%,38.5%{opacity:1;transform:scaleX(0)}44%,94%{opacity:1;transform:scaleX(1)}97%,100%{opacity:0;transform:scaleX(1)}}
+.dash{opacity:0;animation:dash 7000ms infinite}@keyframes dash{0%,39%{opacity:0}42%,94%{opacity:1}97%,100%{opacity:0}}
+.x{opacity:0}.x0{animation:x 7000ms infinite}.x1{animation:x 7000ms -.1s infinite}.x2{animation:x 7000ms -.2s infinite}
+@keyframes x{0%,46%{opacity:0}49%,94%{opacity:1}97%,100%{opacity:0}}
+.lost,.kept{opacity:0;animation:lost 7000ms infinite}@keyframes lost{0%,42%{opacity:0}46%,94%{opacity:1}97%,100%{opacity:0}}
+.win{opacity:0;transform-box:fill-box;transform-origin:50% 0;animation:win 7000ms infinite}
+@keyframes win{0%,35%{opacity:0;transform:translateY(-6px)}39%,94%{opacity:1;transform:none}97%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.r1,.dash,.x,.lost,.kept,.win{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<rect x=".5" y=".5" width="199" height="239" rx="16" fill="#15171F" stroke="#2A2F3B"/>
+<clipPath id="scr"><rect x="8" y="8" width="184" height="116" rx="10"/></clipPath>
+<g clip-path="url(#scr)"><rect x="8" y="8" width="184" height="116" fill="#0D0F14"/><g class="win" transform="translate(0 -4)"><rect x="78" y="14" width="44" height="26" rx="4" fill="#1E2129" stroke="#2E3340"/><rect x="78" y="14" width="44" height="7" rx="3" fill="#2A2E39"/>
+<path d="M95 34.5a2.6 1.9-25 1 1 0-.1zM104 32.5a2.6 1.9-25 1 1 0-.1z" fill="#F2F3F7"/><path d="M96.6 34V25.4l9 -2V32" stroke="#F2F3F7" stroke-width="1.4" fill="none"/></g>
+<text x="20" y="69" font-size="8.5" font-weight="600" fill="#C9CED7">NVIDIA alone</text>
+<rect x="20" y="50" width="160" height="6" rx="3" fill="#1B1F29"/>
+<rect class="g1" x="20" y="50" width="60.8" height="6" rx="3" fill="#76B900"/>
+<rect class="r1" x="20" y="50" width="60.8" height="6" rx="3" fill="#FF4750"/>
+<line class="dash" x1="83.8" y1="53" x2="180" y2="53" stroke="#7D8390" stroke-width="1.2" stroke-dasharray="2 3"/>
+<g class="x x0" transform="translate(30.13 53)"><path d="M-4 -4L4 4M4 -4L-4 4" stroke="#10131A" stroke-width="3.5" stroke-linecap="round"/><path d="M-4 -4L4 4M4 -4L-4 4" stroke="#F2F3F7" stroke-width="1.6" stroke-linecap="round"/></g><g class="x x1" transform="translate(50.4 53)"><path d="M-4 -4L4 4M4 -4L-4 4" stroke="#10131A" stroke-width="3.5" stroke-linecap="round"/><path d="M-4 -4L4 4M4 -4L-4 4" stroke="#F2F3F7" stroke-width="1.6" stroke-linecap="round"/></g><g class="x x2" transform="translate(70.67 53)"><path d="M-4 -4L4 4M4 -4L-4 4" stroke="#10131A" stroke-width="3.5" stroke-linecap="round"/><path d="M-4 -4L4 4M4 -4L-4 4" stroke="#F2F3F7" stroke-width="1.6" stroke-linecap="round"/></g>
+<text class="lost" x="88.8" y="69" font-size="8.5" font-weight="700" fill="#FF4750">Replay lost</text>
+<text x="20" y="107" font-size="8.5" font-weight="600" fill="#C9CED7">With the fix</text>
+<rect x="20" y="88" width="160" height="6" rx="3" fill="#1B1F29"/>
+<rect class="g2" x="20" y="88" width="160" height="6" rx="3" fill="#76B900"/>
+<text class="kept" x="88.8" y="107" font-size="8.5" font-weight="700" fill="#76B900">Still recording</text></g>
+<rect x="8.5" y="8.5" width="183" height="115" rx="9.5" fill="none" stroke="#fff" stroke-opacity=".06"/>
+<rect x="18" y="143" width="8" height="8" rx="2" fill="#76B900"/>
+<text x="33" y="151.5" font-size="15" font-weight="600" fill="#F2F3F7">Instant Replay Fix</text>
+<text x="18" y="174" font-size="11.5" fill="#A3AAB8">Keeps NVIDIA Instant Replay on.</text>
+<text x="18" y="200" font-size="11"><tspan fill="#F2F3F7" font-weight="600">234</tspan><tspan fill="#8B93A5"> KB</tspan><tspan dx="9"> </tspan><tspan fill="#F2F3F7" font-weight="600"><!-- dl:Nvidia_Instant_Replay_Fix -->170<!-- /dl --></tspan><tspan fill="#8B93A5"> downloads</tspan></text>
+<text x="18" y="224" font-size="10.5" fill="#6B7385">Open on GitHub</text>
+<path d="M174 220.5h8m-3-3 3 3-3 3" stroke="#6B7385" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
