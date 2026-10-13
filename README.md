@@ -1,5 +1,9 @@
 <p align="center">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="assets/saudi-flag.svg">
+<source type="image/webp" srcset="assets/saudi-flag.webp">
 <img src="assets/saudi-flag.svg" width="408" alt="Waving ASCII-style Saudi Arabian flag by iAlturki, with the white shahada and sword.">
+</picture>
 </p>
 
 <a href="https://444005129.xyz"><img src="assets/header.svg" width="846" alt="iAlturki. Small native Windows software, in C and C++. Open to software engineering roles."></a>
