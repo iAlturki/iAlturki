@@ -1,3 +1,7 @@
+<p align="center">
+<img src="assets/saudi-flag.svg" width="408" alt="Waving ASCII-style Saudi Arabian flag by iAlturki, with the white shahada and sword.">
+</p>
+
 <a href="https://444005129.xyz"><img src="assets/header.svg" width="846" alt="iAlturki. Small native Windows software, in C and C++. Open to software engineering roles."></a>
 
 <p align="center">
