@@ -1,6 +1,7 @@
 <p align="center">
 <picture>
 <source media="(prefers-reduced-motion: reduce)" srcset="assets/saudi-flag.svg">
+<source type="image/avif" srcset="assets/saudi-flag.avif">
 <source type="image/webp" srcset="assets/saudi-flag.webp">
 <img src="assets/saudi-flag.svg" width="408" alt="Waving ASCII-style Saudi Arabian flag by iAlturki, with the white shahada and sword.">
 </picture>
@@ -16,6 +17,6 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/iAlturki/iAlturki/issues/new?template=hire.yml"><img src="assets/btn-hire.svg" height="40" alt="Hire me"></a>
-<a href="https://444005129.xyz"><img src="assets/btn-site.svg" height="40" alt="444005129.xyz"></a>
+<a href="https://github.com/iAlturki/iAlturki/issues/new?template=hire.yml"><img src="assets/btn-hire.svg" width="232" alt="Hire iAlturki on GitHub"></a>
+<a href="https://444005129.xyz"><img src="assets/btn-site.svg" width="232" alt="Explore iAlturki’s software at 444005129.xyz"></a>
 </p>

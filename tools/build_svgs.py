@@ -7,8 +7,9 @@ external fonts or images. Two small PNGs are inlined: the site's dither and
 Look20's bubble, both rendered by the ports on 444005129.xyz. Every animation
 stops under prefers-reduced-motion and rests on a meaningful frame.
 """
-import base64, io, pathlib
+import base64, io, pathlib, re
 from PIL import Image
+from profile_brand import header as brand_header, button as brand_button
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / 'assets'
@@ -51,7 +52,7 @@ def badge(bx, by, s, uid):
              f'<rect x="{f(bx+.5)}" y="{f(by+.5)}" width="{f(s-1)}" height="{f(s-1)}" rx="{f(r)}" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="{f(max(1, s*.02))}"/>')
     x1, y1, x2, y2 = gx + .13 * u, gy + .08 * u, gx + .87 * u, gy + .92 * u
     sl = f'M{f(x1)} {f(y1)}L{f(x2)} {f(y2)}'
-    defs = (f'<mask id="n{uid}" maskUnits="userSpaceOnUse" x="0" y="0" width="999" height="999"><rect width="999" height="999" fill="#fff"/>'
+    defs = (f'<mask id="n{uid}" maskUnits="userSpaceOnUse" x="{f(bx)}" y="{f(by)}" width="{f(s)}" height="{f(s)}"><rect x="{f(bx)}" y="{f(by)}" width="{f(s)}" height="{f(s)}" fill="#fff"/>'
             f'<path d="{sl}" stroke="#000" stroke-width="{f(.19*u)}" stroke-linecap="round"/></mask>')
     muted = (f'<g mask="url(#n{uid})">{mic(gx+.05*u, gy+.05*u, u, "#101218", ".35")}{mic(gx, gy, u, "#F2F3F7")}</g>'
              f'<path d="{sl}" stroke="{RED}" stroke-width="{f(.10*u)}" stroke-linecap="round"/>')
@@ -64,6 +65,7 @@ def card(name, accent, line, stats, screen, css, alt):
         f'<tspan fill="#F2F3F7" font-weight="600">{v}</tspan><tspan fill="#8B93A5"> {k}</tspan>' for v, k in stats)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240" role="img" font-family="{FONT}">
 <title>{alt}</title>
+<!-- Original profile artwork and animation © 2026 iAlturki. CC BY-NC-SA 4.0. -->
 <style>
 {css}
 @media (prefers-reduced-motion:reduce){{*{{animation:none!important}}}}
@@ -155,11 +157,11 @@ def card_look20():
     ra, rb = A[0] + A[2] - 3 - aw, B[0] + 3
     lid = lambda s: f'<rect class="lid" x="{f(10*s)}" y="{f(13*s)}" width="{f(33*s)}" height="{f(30*s)}" fill="#1E2334"/>'
     drain = lambda s: f'<rect class="drain" x="{f(50*s)}" y="{f(37*s)}" width="{f(100*s)}" height="{f(4*s)}" fill="#30374E"/>'
-    screen = f'''<rect x="{A[0]-2}" y="{A[1]-2}" width="{A[2]+4}" height="{A[3]+4}" rx="3" fill="#1B1F29"/><rect x="{A[0]}" y="{A[1]}" width="{A[2]}" height="{A[3]}" fill="#10131A"/>
+    screen = f'''<defs><image id="bubble" width="160" height="58" href="{BUBBLE}" style="image-rendering:pixelated"/></defs><rect x="{A[0]-2}" y="{A[1]-2}" width="{A[2]+4}" height="{A[3]+4}" rx="3" fill="#1B1F29"/><rect x="{A[0]}" y="{A[1]}" width="{A[2]}" height="{A[3]}" fill="#10131A"/>
 <rect x="{B[0]-2}" y="{B[1]-2}" width="{B[2]+4}" height="{B[3]+4}" rx="3" fill="#1B1F29"/><rect x="{B[0]}" y="{B[1]}" width="{B[2]}" height="{B[3]}" fill="#10131A"/>
 <clipPath id="ca"><rect x="{A[0]}" y="{A[1]}" width="{A[2]}" height="{A[3]}"/></clipPath><clipPath id="cb"><rect x="{B[0]}" y="{B[1]}" width="{B[2]}" height="{B[3]}"/></clipPath>
-<g clip-path="url(#ca)"><g class="sa"><g transform="translate({f(ra)} {f(cy - ah/2)})"><image width="{f(aw)}" height="{f(ah)}" href="{BUBBLE}" style="image-rendering:pixelated"/>{lid(sa)}{drain(sa)}</g></g></g>
-<g clip-path="url(#cb)"><g class="sb"><g transform="translate({f(rb)} {f(cy - bh/2)})"><image width="{f(bw)}" height="{f(bh)}" href="{BUBBLE}" style="image-rendering:pixelated"/>{lid(sb)}{drain(sb)}</g></g></g>
+<g clip-path="url(#ca)"><g class="sa"><g transform="translate({f(ra)} {f(cy - ah/2)})"><use href="#bubble" transform="scale({sa})"/>{lid(sa)}{drain(sa)}</g></g></g>
+<g clip-path="url(#cb)"><g class="sb"><g transform="translate({f(rb)} {f(cy - bh/2)})"><use href="#bubble" transform="scale({sb})"/>{lid(sb)}{drain(sb)}</g></g></g>
 <text x="{A[0]+A[2]}" y="102" font-size="7.5" fill="#7A8296" text-anchor="end">120 DPI</text><text x="{B[0]}" y="118" font-size="7.5" fill="#7A8296">96 DPI</text>'''
     css = f'''.sa{{animation:sa {T}ms infinite}}.sb{{animation:sb {T}ms infinite}}
 @keyframes sa{{0%,8%{{transform:translateX({f(aw+3)}px)}}13.25%,75%{{transform:none;animation-timing-function:cubic-bezier(.333,1,.667,1)}}80.25%,100%{{transform:translateX({f(aw+3)}px)}}}}
@@ -204,57 +206,9 @@ def card_ytr():
                 screen, css, 'ytr-music: the native miniplayer docked above the taskbar expands into a player card on hover. Built on pear-desktop.')
 
 
-# ---------------------------------------------------------------- header
+# ---------------------------------------------------------------- brand
 def header():
-    T = 7000
-    cards = [('m', RED), ('i', NV), ('l', BLUE), ('y', ORANGE)]
-    rest = [(0, 0, 0), (-5, 4, -6), (6, 5, 5), (-1, 9, -2)]
-    deal = [-123, -41, 41, 123]
-    icons = {
-        'm': mic(-11, -22, 22, '#F2F3F7') + f'<path d="M-8.1 -20.2L8.1 -2.7" stroke="{RED}" stroke-width="2.2" stroke-linecap="round"/>',
-        'i': f'<rect x="-16" y="-17" width="32" height="4" rx="2" fill="{NV}"/><rect x="-16" y="-8" width="14" height="4" rx="2" fill="{RED}"/><path d="M-10 -9l4 3m0 -3l-4 3" stroke="#fff" stroke-width="1.2"/>',
-        'l': f'<ellipse cx="0" cy="-11" rx="13" ry="10" fill="#E8EEF8"/><circle cx="1" cy="-11" r="7.5" fill="#603E1A"/><circle cx="1" cy="-11" r="5.8" fill="#96642C"/><circle cx="1" cy="-11" r="3.2" fill="#121622"/>',
-        'y': f'<circle cx="0" cy="-11" r="13" fill="{ORANGE}"/><path d="M-4 -17.5v13l10.5 -6.5z" fill="#fff"/>',
-    }
-    g, css = [], []
-    for i, (k, acc) in reversed(list(enumerate(cards))):
-        x, y, r = rest[i]
-        g.append(f'<g class="c c{i}"><rect x="-37" y="-48" width="74" height="96" rx="10" fill="#1B1E27" stroke="#2E3340"/>'
-                 f'<rect x="-31" y="-42" width="62" height="46" rx="6" fill="#0D0F14"/>{icons[k]}'
-                 f'<rect x="-29" y="14" width="6" height="6" rx="1.5" fill="{acc}"/><rect x="-19" y="15" width="40" height="4" rx="2" fill="#C9CED7"/>'
-                 f'<rect x="-29" y="26" width="50" height="3" rx="1.5" fill="#4A5060"/><rect x="-29" y="34" width="32" height="3" rx="1.5" fill="#4A5060"/></g>')
-        css.append(f'.c{i}{{transform:translate({x}px,{y}px) rotate({r}deg);animation:d{i} {T}ms cubic-bezier(.2,.9,.25,1) infinite;animation-delay:{i*60}ms}}'
-                   f'@keyframes d{i}{{0%,14%{{transform:translate({x}px,{y}px) rotate({r}deg)}}30%,74%{{transform:translate({deal[i]}px,0) rotate(0deg)}}90%,100%{{transform:translate({x}px,{y}px) rotate({r}deg)}}}}')
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 846 210" width="846" height="210" role="img" font-family="{FONT}">
-<title>iAlturki. Small native Windows software, in C and C++. Open to software engineering roles.</title>
-<style>
-.name{{clip-path:inset(0 100% 0 0);animation:wipe 900ms cubic-bezier(.333,1,.667,1) 150ms forwards}}
-@keyframes wipe{{to{{clip-path:inset(0 0 0 0)}}}}
-.sub{{opacity:0;animation:up 600ms cubic-bezier(.333,1,.667,1) 500ms forwards}}.chip{{opacity:0;animation:up 600ms cubic-bezier(.333,1,.667,1) 700ms forwards}}
-@keyframes up{{from{{opacity:0;transform:translateY(6px)}}to{{opacity:1;transform:none}}}}
-{''.join(css)}
-@media (prefers-reduced-motion:reduce){{*{{animation:none!important}}.name{{clip-path:none}}.sub,.chip{{opacity:1}}{''.join(f'.c{i}{{transform:translate({deal[i]}px,0)}}' for i in range(4))}}}
-</style>
-<defs><pattern id="dither" width="180" height="180" patternUnits="userSpaceOnUse"><image width="180" height="180" href="{DITHER}" style="image-rendering:pixelated"/></pattern>
-<clipPath id="frame"><rect width="846" height="210" rx="18"/></clipPath></defs>
-<g clip-path="url(#frame)">
-<rect width="846" height="210" fill="#0D0F14"/>
-<rect y="196" width="846" height="14" fill="url(#dither)"/>
-<text class="name" x="36" y="96" font-size="66" font-weight="600" letter-spacing="-1.6" fill="#F2F3F7">iAlturki</text>
-<text class="sub" x="38" y="130" font-size="17" fill="#A3AAB8">Small native Windows software, in C and C++.</text>
-<g class="chip"><rect x="36" y="146" width="238" height="28" rx="14" fill="#15171F" stroke="#2A2F3B"/><circle cx="52" cy="160" r="4" fill="{GREEN}"/>
-<text x="63" y="164.5" font-size="12.5" fill="#C9CED7">Open to software engineering roles</text></g>
-<g transform="translate(642 98)">{''.join(g)}</g>
-</g>
-<rect x=".5" y=".5" width="845" height="209" rx="17.5" fill="none" stroke="#fff" stroke-opacity=".07"/>
-</svg>'''
-
-
-def pill(text, fill, ink, stroke=None, w=150):
-    st = f' stroke="{stroke}"' if stroke else ''
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} 40" width="{w}" height="40" role="img" font-family="{FONT}">
-<title>{text}</title><rect x=".5" y=".5" width="{w-1}" height="39" rx="19.5" fill="{fill}"{st}/>
-<text x="{w/2}" y="25" font-size="14.5" font-weight="600" fill="{ink}" text-anchor="middle">{text}</text></svg>'''
+    return brand_header(FONT, DITHER)
 
 
 files = {
@@ -263,9 +217,15 @@ files = {
     'card-irfix.svg': card_irfix(),
     'card-look20.svg': card_look20(),
     'card-ytr.svg': card_ytr(),
-    'btn-hire.svg': pill('Hire me', GREEN, '#0D0F14'),
-    'btn-site.svg': pill('444005129.xyz', 'none', '#8B93A5', '#8B93A5', 160),
+    'btn-hire.svg': brand_button('hire', FONT),
+    'btn-site.svg': brand_button('site', FONT),
 }
 for name, svg in files.items():
-    (OUT / name).write_text(svg, encoding='utf-8', newline='\n')
+    path = OUT / name
+    if path.exists():
+        previous = path.read_text(encoding='utf-8')
+        for kind, repo, number in re.findall(r'<!-- (dl|kb):([^ ]+) -->(.*?)<!-- /(?:dl|kb) -->', previous):
+            svg = re.sub(rf'(<!-- {kind}:{re.escape(repo)} -->).*?(<!-- /{kind} -->)', lambda m: m[1] + number + m[2], svg)
+    svg = re.sub(r'>[\r\n]+\s*<', '><', svg).strip() + '\n'
+    path.write_text(svg, encoding='utf-8', newline='\n')
     print(f'{name:18} {len(svg.encode()):>6} bytes')

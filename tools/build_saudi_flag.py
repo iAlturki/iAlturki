@@ -2,7 +2,7 @@
 
 Copyright 2026 iAlturki. Original layout and animation: CC BY-NC-SA 4.0.
 The national flag artwork has separate provenance in assets/SAUDI-FLAG-SOURCE.md.
-Install Pillow and resvg-py, then run from any directory with Python 3.
+Install Pillow, resvg-py, and FFmpeg with libaom-av1, then run with Python 3.
 The browser only decodes pre-rendered WebP frames; it never animates SVG strips.
 """
 
@@ -11,6 +11,7 @@ from html import escape
 from io import BytesIO
 from math import cos, pi, sin
 from pathlib import Path
+import subprocess
 import xml.etree.ElementTree as ET
 
 from PIL import Image
@@ -89,6 +90,23 @@ def build():
     animation = ROOT / "assets/saudi-flag.webp"
     frames[0].save(animation, format="WEBP", save_all=True, append_images=frames[1:], duration=50, loop=0, quality=60, method=3, minimize_size=True)
     print(f"{animation.name}: {animation.stat().st_size:,} bytes; {count} frames at 20 fps")
+
+    # AV1's temporal compression retains every frame. Use an opaque dark
+    # stage because animated AVIF alpha has reported Safari playback bugs.
+    # Transparent WebP remains the compatibility fallback with identical timing.
+    compact = ROOT / "assets/saudi-flag.avif"
+    command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", "408x280", "-r", "20", "-i", "pipe:0", "-frames:v", str(count), "-c:v", "libaom-av1", "-crf", "28", "-cpu-used", "6", "-row-mt", "1", "-threads", "4", "-pix_fmt", "yuv420p", "-g", str(count), "-loop", "0", str(compact)]
+    encoder = subprocess.Popen(command, stdin=subprocess.PIPE)
+    try:
+        for frame in frames:
+            stage = Image.new("RGB", frame.size, "#0d1117")
+            stage.paste(frame, mask=frame.getchannel("A"))
+            encoder.stdin.write(stage.tobytes())
+    finally:
+        encoder.stdin.close()
+    if encoder.wait() != 0:
+        raise RuntimeError("FFmpeg failed to encode the full-frame AVIF")
+    print(f"{compact.name}: {compact.stat().st_size:,} bytes; {count} frames at 20 fps")
 
 
 if __name__ == "__main__":
